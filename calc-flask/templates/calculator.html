@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <br>
+    <br>
+    <br>
+    <br>
+    <title>Calculadora de Lucros/Gastos</title>
+    <link rel="stylesheet" href="../static/bootstrap.css">
+  </head>
+  <body>
+    <section class="calculator">
+      <h1>Calculadora de Lucros/Gastos</h1>
+
+      <form action="/result" method="POST" style="text-align: center;">
+        <label for="lucro bruto">Lucro Bruto</label> <br>
+        R$ <input min="1" type="number" step="0.01" placeholder="Lucro Bruto" name="lucro_bruto" required="required"/><br>
+        <br><label for="gastos">Gastos</label><br>
+        R$ <input min="1" type="number" step="0.01" placeholder="Gastos" name="gastos" required="required"/><br>
+        <br><input type="submit" value="Calcular" id="calc_btn" class="btn" /><br>
+      </form>
+      <br>
+      {% if data %}
+        <h3>Seu Saldo foi de: R$ {{ data.saldo }}</h3>
+        <h3>Seu lucro foi de: {{ data.lucrop }} % </h3>
+        <h3>Seu gasto foi de: {{ data.margemp }} % </h3>
+      {% endif %}
+    </section>
+  </body>
+  © Copyright Matheus Lima
+</html>
