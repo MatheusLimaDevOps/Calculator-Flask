@@ -14,9 +14,9 @@
 
       <form action="/result" method="POST" style="text-align: center;">
         <label for="lucro bruto">Lucro Bruto</label> <br>
-        R$ <input min="1" type="number" step="0.01" placeholder="Lucro Bruto" name="lucro_bruto" required="required"/><br>
+        R$ <input min="0" type="number" step="0.01" name="lucro_bruto" required="required"/><br>
         <br><label for="gastos">Gastos</label><br>
-        R$ <input min="1" type="number" step="0.01" placeholder="Gastos" name="gastos" required="required"/><br>
+        R$ <input min="0" type="number" step="0.01" name="gastos" required="required"/><br>
         <br><input type="submit" value="Calcular" id="calc_btn" class="btn" /><br>
       </form>
       <br>
