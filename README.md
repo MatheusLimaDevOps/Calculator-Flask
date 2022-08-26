@@ -10,6 +10,8 @@
       * Install [pip](https://pip.pypa.io/en/stable/installation/)
        
         * Install [Flask](https://flask.palletsprojects.com/en/2.2.x/installation/)
+        
+           * ``` python3 app.py ``` 
   
   * Running with Docker :whale:
     * Install [Docker](https://docs.docker.com/engine/install/)
