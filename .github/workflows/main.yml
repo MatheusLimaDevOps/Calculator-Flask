@@ -1,0 +1,50 @@
+name: Deploy to ECS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy_to_ecs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v3
+
+#Configura as credenciais da AWS para acesso.
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+#Realiza o acesso no ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+#A tag utilizada está sendo o hash do commit (Criar politica para não encher o repo de imagens)
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: calc-flask
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+#Criando o td.json (n necessário caso o mesmo já esteja no código)
+      - name: Download task definition
+        run: |
+          aws ecs describe-task-definition --task-definition (nome da task) --querry taskDefinition > task-definition,json
+
+#Alterando a TD com a nova tag
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: calc-test
+          image: ${{ steps.build-image.outputs.image }}
