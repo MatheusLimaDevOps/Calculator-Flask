@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 80
 
-CMD [ "python", "/Web/calc-docker/app.py" ]
+CMD [ "python", "./Web/calc-docker/app.py" ]
