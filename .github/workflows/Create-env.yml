@@ -7,7 +7,7 @@ jobs:
    env:
       server: 'TRK-DLMMXM3'
       website-name: 'trinkshmg'
-      apo-pool-name: 'trinks-app'
+      app-pool-name: 'trinks-app'
       website-host-header: '*.trinks-app'
       website-path: 'C:\inetpub\wwwroot\Trinks-H01'
 
