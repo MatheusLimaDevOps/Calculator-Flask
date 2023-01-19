@@ -5,20 +5,18 @@ jobs:
   Create-iis-site:
    runs-on: self-hosted
    env:
-      server: 'TRK-DLMMXM3'
       website-name: 'trinkshmg'
       app-pool-name: 'trinks-app'
-      website-host-header: '*.trinks-app'
+      website-host-header: 'trinks-app'
       website-path: 'C:\inetpub\wwwroot\Trinks-H01'
+      port: 80
 
    steps:
     - name: Checkout
       uses: actions/checkout@v3
+    
     - name: Create Web Site
-      uses: im-open/iis-site-create@v3.0.2
-      with:
-          server: '${{ env.server }}'
-          website-name: '${{ env.website-name }}'
-          app-pool-name: '${{ env.app-pool-name }}'
-          website-host-header: '${{ env.website-host-header}}'
-          website-path: '${{ env.website-path }}'
+      working-directory: c:\Windows\System32\inetsrv
+      run: |
+        appcmd add site /name:'${{ env.website-name }}' /bindings:http/*:'${{ env.port }}':'${{ env.website-host-header}}' /physicalpath:"'${{ env.website-path }}'"
+        appcmd set site /site.name:'${{ env.website-name }}' /[path='/'].applicationPool:'${{ env.app-pool-name }}'
