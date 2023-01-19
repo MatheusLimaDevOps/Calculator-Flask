@@ -19,5 +19,5 @@ jobs:
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
-        appcmd add site /name:'${{ env.website-name }}' /bindings:http/*:'${{ env.port }}':'${{ env.website-host-header}}' /physicalpath:"'${{ env.website-path }}'"
-        appcmd set site /site.name:'${{ env.website-name }}' /[path='/'].applicationPool:'${{ env.app-pool-name }}'
+        appcmd add site /name: ${{ env.website-name }} /bindings:http/*: ${{ env.port }} : ${{ env.website-host-header}}  /physicalpath:"${{ env.website-path }}"
+        appcmd set site /site.name: ${{ env.website-name }} /[path='/'].applicationPool: ${{ env.app-pool-name }}
