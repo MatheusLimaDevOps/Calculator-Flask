@@ -19,7 +19,7 @@ jobs:
    runs-on: self-hosted
    env:
       app-pool-name: trinks-app
-      website-host-header: trinks-app
+      website-host-header: trinkshmg
 
    steps:
     - name: Checkout
@@ -29,5 +29,5 @@ jobs:
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
-        appcmd add site /name:${{ inputs.website-name }} /bindings:http/*:'${{ inputs.port }}:${{ env.website-host-header}}  /physicalpath:"${{ inputs.website-path }}"
+        appcmd add site /name:${{ inputs.website-name }} /bindings:http/*:${{ inputs.port }}:${{ env.website-host-header}}  /physicalpath:"${{ inputs.website-path }}"
         appcmd set site /site.name:${{ inputs.website-name }} /[path='/'].applicationPool:${{ env.app-pool-name }}
