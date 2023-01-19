@@ -17,6 +17,8 @@ on:
 jobs:
   Create-iis-site:
    runs-on: self-hosted
+   outputs:
+     Enviroment: ${{ env.website-host-header}}:${{ inputs.port }}
    env:
       app-pool-name: trinks-app
       website-host-header: trinkshmg
