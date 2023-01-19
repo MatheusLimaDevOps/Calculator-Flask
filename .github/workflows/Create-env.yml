@@ -1,15 +1,25 @@
 name: Create Enviroment
-on: [workflow_dispatch]
+
+
+on: 
+  workflow_dispatch:
+    inputs:
+      website-name:
+        description: 'The name of the website'
+        required: true
+      website-path:
+        description: 'The local directory location of the web site'
+        required: true
+      port:
+        description: 'The port you will use'
+        required: true
 
 jobs:
   Create-iis-site:
    runs-on: self-hosted
    env:
-      website-name: trinkshmg
       app-pool-name: trinks-app
       website-host-header: trinks-app
-      website-path: C:\inetpub\wwwroot\Trinks-H01
-      port: 80
 
    steps:
     - name: Checkout
@@ -19,5 +29,5 @@ jobs:
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
-        appcmd add site /name:${{ env.website-name }} /bindings:http/*:${{ env.port }}:${{ env.website-host-header}}  /physicalpath:"${{ env.website-path }}"
-        appcmd set site /site.name:${{ env.website-name }} /[path='/'].applicationPool:${{ env.app-pool-name }}
+        appcmd add site /name:'${{ inputs.website-name }} /bindings:http/*:'${{ inputs.port }}:${{ env.website-host-header}}  /physicalpath:"${{ inputs.website-path }}"
+        appcmd set site /site.name:${{ inputs.website-name }} /[path='/'].applicationPool:${{ env.app-pool-name }}
