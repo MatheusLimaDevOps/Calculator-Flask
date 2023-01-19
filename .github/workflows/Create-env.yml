@@ -1,0 +1,24 @@
+name: Create Enviroment
+on: [workflow_dispatch]
+
+jobs:
+  Create-iis-site:
+   runs-on: self-hosted
+   env:
+      server: 'TRK-DLMMXM3'
+      website-name: 'trinkshmg'
+      apo-pool-name: 'trinks-app'
+      website-host-header: '*.trinks-app'
+      website-path: 'C:\inetpub\wwwroot\Trinks-H01'
+
+   steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Create Web Site
+      uses: im-open/iis-site-create@v3.0.2
+      with:
+          server: '${{ env.server }}'
+          website-name: '${{ env.website-name }}'
+          app-pool-name: '${{ env.app-pool-name }}'
+          website-host-header: '${{ env.website-host-header}}'
+          website-path: '${{ env.website-path }}'
