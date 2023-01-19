@@ -1,4 +1,4 @@
-name: Create Enviroment
+name: Delete Enviroment
 
 on: 
   workflow_dispatch:
