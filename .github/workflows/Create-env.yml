@@ -5,10 +5,10 @@ jobs:
   Create-iis-site:
    runs-on: self-hosted
    env:
-      website-name: 'trinkshmg'
-      app-pool-name: 'trinks-app'
-      website-host-header: 'trinks-app'
-      website-path: 'C:\inetpub\wwwroot\Trinks-H01'
+      website-name: trinkshmg
+      app-pool-name: trinks-app
+      website-host-header: trinks-app
+      website-path: C:\inetpub\wwwroot\Trinks-H01
       port: 80
 
    steps:
