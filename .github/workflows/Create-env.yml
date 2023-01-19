@@ -5,13 +5,13 @@ on:
   workflow_dispatch:
     inputs:
       website-name:
-        description: 'The name of the website'
+        description: 'The name of the website.'
         required: true
       website-path:
-        description: 'The local directory location of the web site'
+        description: 'The local directory location of the web site.'
         required: true
       port:
-        description: 'The port you will use'
+        description: 'The port you will use.'
         required: true
 
 jobs:
@@ -29,5 +29,5 @@ jobs:
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
-        appcmd add site /name:'${{ inputs.website-name }} /bindings:http/*:'${{ inputs.port }}:${{ env.website-host-header}}  /physicalpath:"${{ inputs.website-path }}"
+        appcmd add site /name:${{ inputs.website-name }} /bindings:http/*:'${{ inputs.port }}:${{ env.website-host-header}}  /physicalpath:"${{ inputs.website-path }}"
         appcmd set site /site.name:${{ inputs.website-name }} /[path='/'].applicationPool:${{ env.app-pool-name }}
