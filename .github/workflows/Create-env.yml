@@ -17,8 +17,7 @@ on:
 jobs:
   Create-iis-site:
    runs-on: self-hosted
-   outputs:
-     Enviroment: ${{ env.website-host-header}}:${{ inputs.port }}
+
    env:
       app-pool-name: trinks-app
       website-host-header: trinkshmg
@@ -35,3 +34,4 @@ jobs:
       run: |
         appcmd add site /name:${{ inputs.website-name }} /bindings:http/*:${{ inputs.port }}:${{ env.website-host-header}}  /physicalpath:"${{ inputs.website-path }}"
         appcmd set site /site.name:${{ inputs.website-name }} /[path='/'].applicationPool:${{ env.app-pool-name }}
+        appcmd list site ${{ inputs.website-name }}
