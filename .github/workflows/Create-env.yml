@@ -13,6 +13,10 @@ on:
       port:
         description: 'The port you will use.'
         required: true
+env:
+      app-pool-name: trinks-app
+      website-host-header: trinkshmg
+      exit: $GITHUB_OUTPUT
 
 jobs:
   Verify:
@@ -20,7 +24,7 @@ jobs:
     steps:
       - name: Create Folder
         shell: cmd
-        id: Folder
+        id: folder
         run: |    
           if exist C:\inetpub\wwwroot\Trinks-H01 (
               echo exit="true" >>> $GITHUB_OUTPUT
@@ -29,7 +33,7 @@ jobs:
           )
   
   create-folder:
-    if: ${{ steps.Folder.outputs.exit }} == 'false'
+    if: env.exit == 'false'
     runs-on: self-hosted
     steps:
       - name: Create Folder
@@ -43,10 +47,6 @@ jobs:
           mkdir C:\Sites\Branches\${{ github.ref_name }}\LinkDePagamento
   Create-iis-site:
    runs-on: self-hosted
-
-   env:
-      app-pool-name: trinks-app
-      website-host-header: trinkshmg
 
    steps:
     - name: Checkout
