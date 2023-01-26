@@ -21,9 +21,23 @@ on:
         required: true
 
 jobs:
-
-  create-folder:
+  Verify:
     if: inputs.ambiente == 'Create'
+    runs-on: self-hosted
+
+    steps:
+      - name: Create Folder
+        shell: cmd
+        id: Folder
+        run: |    
+          if exist C:\inetpub\wwwroot\Trinks-H01 (
+              echo exit="true" >>> $GITHUB_OUTPUT
+          ) else (
+              echo exit="false" >>> $GITHUB_OUTPUT
+          )
+  
+  create-folder:
+    if: steps.Folder.outputs.exit == 'false'
     runs-on: self-hosted
 
     steps:
