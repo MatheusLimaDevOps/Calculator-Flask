@@ -21,13 +21,13 @@ jobs:
     - name: Set Branch name
       id: branch
       run: |
-          export BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
-          echo $BRANCH >> $GITHUB_OUTPUT
-  Delete-iis-site:
-    runs-on: self-hosted
-    steps:
-      - name: Delete Web Site
-        working-directory: c:\Windows\System32\inetsrv
-        shell: cmd
-        run: |
-          appcmd delete site ${{ steps.branch.outputs.BRANCH }}
+          export BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref') >> $GITHUB_OUTPUT
+          echo $BRANCH >>> $GITHUB_OUTPUT
+#Delete-iis-site:
+#  runs-on: self-hosted
+#  steps:
+#    - name: Delete Web Site
+ #     working-directory: c:\Windows\System32\inetsrv
+ #     shell: cmd
+ #     run: |
+ #       appcmd delete site ${{ steps.branch.outputs.BRANCH }}
