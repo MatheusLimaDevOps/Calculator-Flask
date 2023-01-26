@@ -23,6 +23,9 @@ jobs:
       run: |
           export BRANCH=$(cat << EOF ${{ github.event_path }} | jq --raw-output '.ref' EOF)
           echo $BRANCH >> $GITHUB_OUTPUT
+    - name: Check output var
+      run: |
+          echo ${{steps.branch.outputs.BRANCH}}
 #Delete-iis-site:
 #  runs-on: self-hosted
 #  steps:
