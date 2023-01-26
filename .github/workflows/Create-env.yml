@@ -4,12 +4,6 @@ name: Create Enviroment
 on: 
   workflow_dispatch:
     inputs:
-      ambiente:
-        type: choice
-        description: Want to create or update the environment?
-        options:
-          - Create
-          - Update
       website-name:
         description: 'The name of the website.'
         required: true
@@ -22,7 +16,6 @@ on:
 
 jobs:
   Verify:
-    if: inputs.ambiente == 'Create'
     runs-on: self-hosted
 
     steps:
