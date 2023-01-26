@@ -22,7 +22,7 @@ jobs:
       id: branch
       run: |
           BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
-          echo ${BRANCH} >> $GITHUB_OUTPUT
+          echo "${BRANCH}" >> $GITHUB_OUTPUT
   Delete-iis-site:
     runs-on: self-hosted
     steps:
@@ -30,4 +30,4 @@ jobs:
         working-directory: c:\Windows\System32\inetsrv
         shell: cmd
         run: |
-          appcmd delete site {{ steps.branch.outputs.BRANCH }}
+          appcmd delete site ${{ steps.branch.outputs.BRANCH }}
