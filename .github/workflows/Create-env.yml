@@ -23,7 +23,7 @@ on:
 jobs:
 
   create-folder:
-    if: ${{ inputs.ambiente }} == Create
+    if: ${{ inputs.ambiente }} == 'Create'
     runs-on: self-hosted
 
     steps:
