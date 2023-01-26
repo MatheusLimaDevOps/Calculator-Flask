@@ -7,7 +7,7 @@ on:
 
 jobs:
   Delete-iis-site:
-   runs-on: self-hosted
+   runs-on: ubuntu-latest
 
    steps:
     - name: Checkout
@@ -18,8 +18,10 @@ jobs:
     - name: Git Json 
       run: echo "${{ toJson(github) }}"
     
-    - name: Create Web Site
-      working-directory: c:\Windows\System32\inetsrv
-      shell: cmd
+    - name: Set Branch name
       run: |
-        appcmd delete site ${{ github.ref }}
+          BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
+          echo "${{ github.repository }} has ${BRANCH} branch"
+          echo "::set-env name=STAGE::$(echo ${BRANCH})"
+    - name: Echo Branch name
+      run: echo Deleting from STAGE:$STAGE
