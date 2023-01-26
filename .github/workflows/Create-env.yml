@@ -18,22 +18,8 @@ env:
       website-host-header: trinkshmg
       exit: $GITHUB_OUTPUT
 
-jobs:
-  Verify:
-    runs-on: self-hosted
-    steps:
-      - name: Create Folder
-        shell: cmd
-        id: folder
-        run: |    
-          if exist C:\inetpub\wwwroot\Trinks-H01 (
-              echo exit="true" >>> $GITHUB_OUTPUT
-          ) else (
-              echo exit="false" >>> $GITHUB_OUTPUT
-          )
-  
+jobs: 
   create-folder:
-    if: env.exit == 'false'
     runs-on: self-hosted
     steps:
       - name: Create Folder
@@ -53,6 +39,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         clean: false
+        run: echo "${{ toJson(github) }}"
     
     - name: Create Web Site
       working-directory: c:\Windows\System32\inetsrv
