@@ -17,7 +17,6 @@ on:
 jobs:
   Verify:
     runs-on: self-hosted
-
     steps:
       - name: Create Folder
         shell: cmd
@@ -30,9 +29,8 @@ jobs:
           )
   
   create-folder:
-    if: steps.Folder.outputs.exit == 'false'
+    if: ${{ steps.Folder.outputs.exit }} == 'false'
     runs-on: self-hosted
-
     steps:
       - name: Create Folder
         shell: cmd
