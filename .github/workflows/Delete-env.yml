@@ -23,8 +23,6 @@ jobs:
       run: |
           export teste=$(cat << EOF ${{ github.event_path }} | jq --raw-output '.ref' EOF)
           echo $teste >> $GITHUB_OUTPUT
-    - name: Check output var
-      run: |
           echo ${{steps.branch.outputs.teste}}
 #Delete-iis-site:
 #  runs-on: self-hosted
