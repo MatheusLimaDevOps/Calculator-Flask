@@ -21,8 +21,8 @@ jobs:
     - name: Set Branch name
       id: branch
       run: |
-          export BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref') >> $GITHUB_OUTPUT
-          echo $BRANCH >>> $GITHUB_OUTPUT
+          export BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
+          echo $BRANCH
 #Delete-iis-site:
 #  runs-on: self-hosted
 #  steps:
