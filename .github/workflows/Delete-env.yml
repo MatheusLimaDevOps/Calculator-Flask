@@ -6,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  Delete-iis-site:
+  Delete-iis:
    runs-on: ubuntu-latest
 
    steps:
@@ -19,9 +19,15 @@ jobs:
       run: echo "${{ toJson(github) }}"
     
     - name: Set Branch name
+      id: branch
       run: |
           BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
-          echo ${BRANCH}
-          
-    - name: Echo Branch name
-      run: echo Deleting from STAGE:$STAGE
+          echo ${BRANCH} >>> $GITHUB_OUTPUT
+  Delete-iis-site:
+    runs-on: self-hosted
+    steps:
+      - name: Delete Web Site
+        working-directory: c:\Windows\System32\inetsrv
+        shell: cmd
+        run: |
+          appcmd delete site {{ steps.branch.outputs.BRANCH }}
