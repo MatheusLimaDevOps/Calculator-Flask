@@ -3,7 +3,7 @@ name: Delete Enviroment
 on: 
   delete:
     branches: 
-      - **-**
+      - '**'
 
 jobs:
   Delete-iis-site:
