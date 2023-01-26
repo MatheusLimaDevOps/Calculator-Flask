@@ -7,7 +7,7 @@ on:
 
 jobs:
   Delete-iis:
-   runs-on: self-hosted
+   runs-on: ubuntu-latest
 
    steps:
     - name: Checkout
@@ -21,10 +21,13 @@ jobs:
     - name: Set Branch name
       id: branch
       run: |
-          set BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
-          echo ${BRANCH} >>> $GITHUB_OUTPUT
-    - name: Delete Web Site
-      working-directory: c:\Windows\System32\inetsrv
-      shell: cmd
-      run: |
+          BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
+          echo ${BRANCH} >> $GITHUB_OUTPUT
+  Delete-iis-site:
+    runs-on: self-hosted
+    steps:
+      - name: Delete Web Site
+        working-directory: c:\Windows\System32\inetsrv
+        shell: cmd
+        run: |
           appcmd delete site {{ steps.branch.outputs.BRANCH }}
