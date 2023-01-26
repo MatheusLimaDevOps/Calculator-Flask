@@ -2,10 +2,8 @@ name: Delete Enviroment
 
 on: 
   delete:
-    inputs:
-      website-name:
-        description: 'The name of the website.'
-        required: true
+    branches: 
+      - **-**
 
 jobs:
   Delete-iis-site:
