@@ -22,6 +22,6 @@ jobs:
       run: |
           BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
           echo "${{ github.repository }} has ${BRANCH} branch"
-          echo "::set-env name=STAGE::$(echo ${BRANCH})"
+          echo ":: name=STAGE::$(echo ${BRANCH})"
     - name: Echo Branch name
       run: echo Deleting from STAGE:$STAGE
