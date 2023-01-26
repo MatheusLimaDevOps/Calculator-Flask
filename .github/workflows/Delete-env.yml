@@ -20,4 +20,4 @@ jobs:
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
-        appcmd delete site ${{ github.ref_name }}
+        appcmd delete site ${{ github.ref }}
