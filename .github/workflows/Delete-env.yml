@@ -21,7 +21,7 @@ jobs:
     - name: Set Branch name
       run: |
           BRANCH=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
-          echo ${BRANCH}"
+          echo ${BRANCH}
           
     - name: Echo Branch name
       run: echo Deleting from STAGE:$STAGE
