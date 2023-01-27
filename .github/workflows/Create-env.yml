@@ -29,7 +29,6 @@ jobs:
         id: test_path
         run: |
           $path= Test-Path "C:\Sites\Branches\${{ github.ref_name }}"
-          echo $path
           echo $path=path >> $GITHUB_OUTPUT
           echo $GITHUB_OUTPUT
 
