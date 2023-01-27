@@ -22,7 +22,7 @@ jobs:
       id: branch
       run: |
           teste=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
-          echo $teste >>> $GITHUB_OUTPUT
+          echo $teste >> $GITHUB_OUTPUT
   Delete-iis-site:
     runs-on: self-hosted
     steps:
