@@ -22,6 +22,8 @@ jobs:
 
   test-path:
     runs-on: self-hosted
+    outputs:
+      folder: ${{steps.test_path.outputs.folder}}
     steps:
       - name: Test path
         id: test_path
@@ -31,7 +33,8 @@ jobs:
           echo folder=$path >> $GITHUB_OUTPUT
 
   create-folder:
-    if: ${{steps.test_path.outputs.folder}} == 'False'
+    needs: test-path
+    if: ${{needs.test_path.outputs.folder}} == 'False'
     runs-on: self-hosted
     steps:
       - name: Create Folder
