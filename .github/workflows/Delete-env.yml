@@ -29,7 +29,7 @@ jobs:
     needs: set-name-branch
     runs-on: self-hosted
     steps:
-    - name: Delete Web Site
+    - name: Delete Web App
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
