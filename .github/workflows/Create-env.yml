@@ -27,7 +27,7 @@ jobs:
         shell: pwsh
         run: |
           $path=test-path "C:\Sites\Branches\${{ github.ref_name }}"
-          echo ::set-output name=path::$( $path)
+          echo $path=path >> $GITHUB_OUTPUT
 
 
       - name: Create Folder
