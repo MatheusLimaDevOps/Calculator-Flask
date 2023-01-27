@@ -26,12 +26,12 @@ jobs:
         id: test_path
         shell: pwsh
         run: |
-          $path=test-path "C:\Sites\Branches\main"
-          echo folder=$path >> $env:$GITHUB_OUTPUT
+          $path=test-path "C:\Sites\Branches\${{ github.ref_name }}"
+          echo folder=$path >> $GITHUB_OUTPUT
 
 
       - name: Create Folder
-        if: ${{steps.test_path.outputs.folder}} == False
+        if: ${{steps.test_path.outputs.folder}} == 'False'
         shell: cmd
         run: |
           mkdir C:\Sites\Branches\${{ github.ref_name }}
