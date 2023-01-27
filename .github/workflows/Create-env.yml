@@ -42,6 +42,7 @@ jobs:
           mkdir C:\Sites\Branches\${{ github.ref_name }}\LinkDePagamento
   Create-iis-site:
    runs-on: self-hosted
+   needs: create-folder
 
    steps:
     - name: Checkout
