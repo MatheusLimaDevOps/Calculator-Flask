@@ -21,7 +21,7 @@ jobs:
     - name: Set Branch name
       id: branch
       run: |
-          teste=$(cat ${{ github.event_path }} | jq --raw-output '.ref') >> ${{ env.app-pool-name }}
+          teste=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
           echo $teste
 #Delete-iis-site:
 #  runs-on: self-hosted
