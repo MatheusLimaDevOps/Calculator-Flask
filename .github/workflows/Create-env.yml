@@ -25,16 +25,16 @@ jobs:
       - name: Test path
         id: test_path
         run: |
-          if not exist C:\Sites\Branches\${{ github.ref_name }} mkdir C:\Sites\Branches\${{ github.ref_name }}
-          if not exist C:\Sites\Branches\${{ github.ref_name }}\Api mkdir C:\Sites\Branches\${{ github.ref_name }}\Api
-          if not exist C:\Sites\Branches\${{ github.ref_name }}\ProApi mkdir C:\Sites\Branches\${{ github.ref_name }}\ProApi
-          if not exist C:\Sites\Branches\${{ github.ref_name }}\Services mkdir C:\Sites\Branches\${{ github.ref_name }}\Services
-          if not exist C:\Sites\Branches\${{ github.ref_name }}\WindowsService mkdir C:\Sites\Branches\${{ github.ref_name }}\WindowsService
-          if not exist C:\Sites\Branches\${{ github.ref_name }}\LinkDePagamento mkdir C:\Sites\Branches\${{ github.ref_name }}\LinkDePagamento
+          $folder=C:\Sites\Branches\${{ github.ref_name }}
+          if not exist $folder mkdir $folder
+          if not exist $folder mkdir $folder\Api
+          if not exist $folder mkdir $folder\ProApi
+          if not exist $folder mkdir $folder\Services
+          if not exist $folder mkdir $folder\WindowsService
+          if not exist $folder mkdir $folder\LinkDePagamento
 
   Create-iis-site:
    runs-on: self-hosted
-   needs: create-folder
 
    steps:
     - name: Checkout
