@@ -19,7 +19,7 @@ env:
 
 jobs:
 
-  test-path:
+  creat-folder:
     runs-on: self-hosted
     outputs:
       path: ${{steps.test_path.outputs.path}}
@@ -27,30 +27,13 @@ jobs:
       - name: Test path
         id: test_path
         run: |
-          echo "path=Test-Path C:\Sites\Branches\${{ github.ref_name }}" >> $env:GITHUB_OUTPUT
+          if not exist C:\Sites\Branches\${{ github.ref_name }} mkdir C:\Sites\Branches\${{ github.ref_name }}
+          if not exist C:\Sites\Branches\${{ github.ref_name }}\Api mkdir C:\Sites\Branches\${{ github.ref_name }}\Api
+          if not exist C:\Sites\Branches\${{ github.ref_name }}\ProApi mkdir C:\Sites\Branches\${{ github.ref_name }}\ProApi
+          if not exist C:\Sites\Branches\${{ github.ref_name }}\Services mkdir C:\Sites\Branches\${{ github.ref_name }}\Services
+          if not exist C:\Sites\Branches\${{ github.ref_name }}\WindowsService mkdir C:\Sites\Branches\${{ github.ref_name }}\WindowsService
+          if not exist C:\Sites\Branches\${{ github.ref_name }}\LinkDePagamento mkdir C:\Sites\Branches\${{ github.ref_name }}\LinkDePagamento
 
-  test:
-      runs-on: self-hosted
-      needs: test-path
-      steps:
-      - name: Test path2
-        id: test_path2
-        run: |
-          echo ${{needs.test_path.outputs.path}}
-
-  create-folder:
-    needs: test-path
-    if: needs.test_path.outputs.path == 'False'
-    runs-on: self-hosted
-    steps:
-      - name: Create Folder
-        run: |
-          mkdir C:\Sites\Branches\${{ github.ref_name }}
-          mkdir C:\Sites\Branches\${{ github.ref_name }}\Api
-          mkdir C:\Sites\Branches\${{ github.ref_name }}\ProApi
-          mkdir C:\Sites\Branches\${{ github.ref_name }}\Services
-          mkdir C:\Sites\Branches\${{ github.ref_name }}\WindowsService
-          mkdir C:\Sites\Branches\${{ github.ref_name }}\LinkDePagamento
   Create-iis-site:
    runs-on: self-hosted
    needs: create-folder
