@@ -22,18 +22,18 @@ jobs:
   test-path:
     runs-on: self-hosted
     outputs:
-      path: ${{steps.test_path.outputs.path}}
+      path: ${{steps.test_path.outputs.path2}}
     steps:
       - name: Test path
         id: test_path
         run: |
           $path= Test-Path "C:\Sites\Branches\${{ github.ref_name }}"
-          echo $path >> $GITHUB_OUTPUT
+          echo "::set-output name=path2::$path
           echo ${{steps.test_path.outputs.path}}
 
   create-folder:
     needs: test-path
-    if: ${{needs.test_path.outputs.path}} == 'False'
+    if: ${{needs.test_path.outputs.path2}} == 'False'
     runs-on: self-hosted
     steps:
       - name: Create Folder
