@@ -32,7 +32,8 @@ jobs:
           mkdir $folder\ProApi
           mkdir $folder\Services
           mkdir $folder\WindowsService
-          mkdir $folder\LinkDePagamento)
+          mkdir $folder\LinkDePagamento
+          )
 
   Create-iis-site:
    runs-on: self-hosted
