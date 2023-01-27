@@ -16,7 +16,6 @@ on:
 env:
       app-pool-name: trinks-app
       website-host-header: trinkshmg
-      exit: teste
 
 jobs:
 
@@ -30,7 +29,7 @@ jobs:
         run: |
           $path= Test-Path "C:\Sites\Branches\${{ github.ref_name }}"
           echo $path >> $GITHUB_OUTPUT
-          echo $GITHUB_OUTPUT
+          echo ${{steps.test_path.outputs.path}}
 
   create-folder:
     needs: test-path
