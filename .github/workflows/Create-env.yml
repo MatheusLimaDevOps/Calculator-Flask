@@ -28,7 +28,15 @@ jobs:
         id: test_path
         run: |
           echo "path=Test-Path C:\Sites\Branches\${{ github.ref_name }}" >> $env:GITHUB_OUTPUT
-          echo ${{steps.test_path.outputs.path}}
+
+  test:
+      runs-on: self-hosted
+      needs: test-path
+      steps:
+      - name: Test path
+        id: test_path
+        run: |
+          echo ${{needs.test_path.outputs.path}}
 
   create-folder:
     needs: test-path
