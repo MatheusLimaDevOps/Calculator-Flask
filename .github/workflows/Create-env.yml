@@ -23,7 +23,7 @@ jobs:
   test-path:
     runs-on: self-hosted
     outputs:
-      folder: ${{steps.test_path.outputs.folder}}
+      path: ${{steps.test_path.outputs.path}}
     steps:
       - name: Test path
         id: test_path
