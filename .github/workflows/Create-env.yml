@@ -29,7 +29,7 @@ jobs:
         id: test_path
         shell: pwsh
         run: |
-          $path=test-path "C:\Sites\Branches\${{ github.ref_name }}"
+          $path=test-path "C:\Sites\Branches\$'{{ github.ref_name }}'"
           echo $path
 
   create-folder:
