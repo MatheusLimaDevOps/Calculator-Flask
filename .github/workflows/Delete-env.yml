@@ -9,7 +9,7 @@ jobs:
   Delete-iis:
    runs-on: ubuntu-latest
    outputs:
-     exit: ${{ steps.branch.outputs.exit }}
+     test: ${{ steps.branch.outputs.test }}
 
    steps:
     - name: Checkout
@@ -23,7 +23,7 @@ jobs:
     - name: Set Branch name
       id: branch
       run: |
-          echo test=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
+          echo test=$(cat ${{ github.event_path }} | jq --raw-output '.ref') >> $GITHUB_OUTPUT
           
   Delete-iis-site:
     needs: Delete-iis
@@ -33,4 +33,4 @@ jobs:
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
-        appcmd delete site ${{needs.Delete-iis.outputs.exit}}
+        appcmd delete site ${{needs.Delete-iis.outputs.test}}
