@@ -32,7 +32,7 @@ jobs:
 
       - name: Create Folder
         if: ${{steps.test_path.outputs.folder}} == 'False'
-        shell: cmd
+        shell: pwsh
         run: |
           mkdir C:\Sites\Branches\${{ github.ref_name }}
           mkdir C:\Sites\Branches\${{ github.ref_name }}\Api
