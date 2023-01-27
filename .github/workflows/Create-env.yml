@@ -36,6 +36,7 @@ jobs:
 
   Create-iis-site:
    runs-on: self-hosted
+   needs: creat-folder
 
    steps:
     - name: Checkout
