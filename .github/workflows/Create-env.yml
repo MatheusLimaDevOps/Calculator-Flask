@@ -31,7 +31,7 @@ jobs:
           echo folder=$path >> $GITHUB_OUTPUT
 
   create-folder:
-    if: ${{env.exit}} == 'False'
+    if: ${{steps.test_path.outputs.folder}} == 'False'
     runs-on: self-hosted
     steps:
       - name: Create Folder
