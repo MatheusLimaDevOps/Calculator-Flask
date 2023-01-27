@@ -22,7 +22,16 @@ jobs:
   create-folder:
     runs-on: self-hosted
     steps:
+      - name: Test path
+        id: test_path
+        shell: pwsh
+        run: |
+          $path=test-path "C:\Sites\Branches\${{ github.ref_name }}"
+          echo $path >> $GITHUB_OUTPUT
+
+
       - name: Create Folder
+        if: ${{github.test_path.outputs.path}} == False
         shell: cmd
         run: |
           mkdir C:\Sites\Branches\${{ github.ref_name }}
