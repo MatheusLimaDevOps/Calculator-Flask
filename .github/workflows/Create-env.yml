@@ -27,9 +27,8 @@ jobs:
       - name: Test path
         id: test_path
         run: |
-          $path1=Test-Path "C:\Sites\Branches\${{ github.ref_name }}"
-          echo "$path=$path1" >> $GITHUB_OUTPUT
-          echo ${{steps.test_path.outputs.$path}}
+          $path=Test-Path "C:\Sites\Branches\${{ github.ref_name }}"
+          echo $path=>> $GITHUB_OUTPUT
 
   create-folder:
     needs: test-path
