@@ -8,6 +8,8 @@ on:
 jobs:
   Delete-iis:
    runs-on: ubuntu-latest
+   outputs:
+     teste: ${{ steps.branch.outputs.teste }}
 
    steps:
     - name: Checkout
@@ -24,6 +26,7 @@ jobs:
           teste=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
           echo $teste >> $GITHUB_OUTPUT
   Delete-iis-site:
+    needs: Delete-iis
     runs-on: self-hosted
     steps:
     - name: Delete Web Site
