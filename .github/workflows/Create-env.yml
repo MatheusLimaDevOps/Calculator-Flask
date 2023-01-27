@@ -26,12 +26,13 @@ jobs:
         id: test_path
         run: |
           $folder=C:\Sites\Branches\${{ github.ref_name }}
-          if not exist $folder mkdir $folder
-          if not exist $folder mkdir $folder\Api
-          if not exist $folder mkdir $folder\ProApi
-          if not exist $folder mkdir $folder\Services
-          if not exist $folder mkdir $folder\WindowsService
-          if not exist $folder mkdir $folder\LinkDePagamento
+          if not exist $folder (
+          mkdir $folder
+          mkdir $folder\Api
+          mkdir $folder\ProApi
+          mkdir $folder\Services
+          mkdir $folder\WindowsService
+          mkdir $folder\LinkDePagamento)
 
   Create-iis-site:
    runs-on: self-hosted
