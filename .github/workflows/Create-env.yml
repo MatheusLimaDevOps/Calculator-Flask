@@ -31,7 +31,7 @@ jobs:
 
   create-folder:
     needs: test-path
-    if: ${{needs.test_path.outputs.path}} == 'False'
+    if: needs.test_path.outputs.path == 'False'
     runs-on: self-hosted
     steps:
       - name: Create Folder
