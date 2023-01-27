@@ -21,8 +21,6 @@ jobs:
 
   creat-folder:
     runs-on: self-hosted
-    outputs:
-      path: ${{steps.test_path.outputs.path}}
     steps:
       - name: Test path
         id: test_path
