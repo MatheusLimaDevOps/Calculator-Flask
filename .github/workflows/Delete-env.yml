@@ -5,9 +5,6 @@ on:
     branches: 
       - '**'
 
-env:
-  branch: ${{ env.test1 }}
-
 jobs:
   Delete-iis:
    runs-on: ubuntu-latest
@@ -36,4 +33,4 @@ jobs:
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
-        appcmd delete site ${{ env.branch }}
+        appcmd delete site ${{ env.test1 }}
