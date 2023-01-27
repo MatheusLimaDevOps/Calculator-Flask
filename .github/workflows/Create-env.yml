@@ -16,7 +16,7 @@ on:
 env:
       app-pool-name: trinks-app
       website-host-header: trinkshmg
-      exit: $GITHUB_OUTPUT
+      exit: teste
 
 jobs: 
   create-folder:
@@ -27,11 +27,11 @@ jobs:
         shell: pwsh
         run: |
           $path=test-path "C:\Sites\Branches\${{ github.ref_name }}"
-          echo folder=$path >> $GITHUB_OUTPUT
+          echo $path == ${{env.exit}}
 
 
       - name: Create Folder
-        if: ${{steps.test_path.outputs.folder}} == 'False'
+        if: ${{env.exit}} == 'False'
         shell: pwsh
         run: |
           mkdir C:\Sites\Branches\${{ github.ref_name }}
