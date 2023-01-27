@@ -29,7 +29,6 @@ jobs:
         run: |
           $path= Test-Path "C:\Sites\Branches\${{ github.ref_name }}"
           echo "::set-output name=path2::$path"
-          echo ${{steps.test_path.outputs.path2}}
 
   create-folder:
     needs: test-path
