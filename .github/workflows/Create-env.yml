@@ -30,7 +30,7 @@ jobs:
         shell: pwsh
         run: |
           $path=test-path "C:\Sites\Branches\${{ github.ref_name }}"
-          echo folder=$path >> $GITHUB_OUTPUT
+          echo $path >> $GITHUB_OUTPUT
 
   create-folder:
     needs: test-path
