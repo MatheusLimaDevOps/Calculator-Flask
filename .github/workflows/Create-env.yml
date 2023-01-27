@@ -31,7 +31,7 @@ jobs:
 
 
       - name: Create Folder
-        if: ${{github.test_path.outputs.path}} == False
+        if: ${{steps.test_path.outputs.path}} == False
         shell: cmd
         run: |
           mkdir C:\Sites\Branches\${{ github.ref_name }}
