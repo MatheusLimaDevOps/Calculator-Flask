@@ -33,4 +33,4 @@ jobs:
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
-        appcmd delete site ${{needs.Delete-iis.outputs.name}}
+        appcmd delete site trinkshmg/${{needs.Delete-iis.outputs.name}}
