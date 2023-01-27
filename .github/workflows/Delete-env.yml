@@ -6,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  Delete-iis:
+  set-name-branch:
    runs-on: ubuntu-latest
    outputs:
      name: ${{ steps.branch.outputs.name }}
@@ -25,12 +25,12 @@ jobs:
       run: |
           echo name=$(cat ${{ github.event_path }} | jq --raw-output '.ref') >> $GITHUB_OUTPUT
           
-  Delete-iis-site:
-    needs: Delete-iis
+  Delete-iis-app:
+    needs: set-name-branch
     runs-on: self-hosted
     steps:
     - name: Delete Web Site
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
-        appcmd delete app trinkshmg/${{needs.Delete-iis.outputs.name}}
+        appcmd delete app trinkshmg/${{needs.set-name-branch.outputs.name}}
