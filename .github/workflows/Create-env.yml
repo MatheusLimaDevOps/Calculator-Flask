@@ -18,8 +18,9 @@ env:
       website-host-header: trinkshmg
       exit: teste
 
-jobs: 
-  create-folder:
+jobs:
+
+  test-path:
     runs-on: self-hosted
     steps:
       - name: Test path
@@ -27,11 +28,13 @@ jobs:
         shell: pwsh
         run: |
           $path=test-path "C:\Sites\Branches\${{ github.ref_name }}"
-          echo $path == ${{env.exit}}
+          echo folder=$path >> $GITHUB_OUTPUT
 
-
+  create-folder:
+    if: ${{env.exit}} == 'False'
+    runs-on: self-hosted
+    steps:
       - name: Create Folder
-        if: ${{env.exit}} == 'False'
         shell: pwsh
         run: |
           mkdir C:\Sites\Branches\${{ github.ref_name }}
