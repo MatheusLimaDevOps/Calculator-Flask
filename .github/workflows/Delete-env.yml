@@ -24,7 +24,7 @@ jobs:
       id: branch
       run: |
           teste=$(cat ${{ github.event_path }} | jq --raw-output '.ref')
-          echo '::set-output name=exit::$teste'
+          echo '::set-output name=exit::test'
   Delete-iis-site:
     needs: Delete-iis
     runs-on: self-hosted
