@@ -42,24 +42,9 @@ jobs:
         exit 1
         }
 
-  creat-folder:
-    needs: test-path
-    runs-on: self-hosted
-    if: needs.test-path.outputs.exit-code == '0'
-    steps:
-      - name: Create Folder
-        run: |
-          echo Creating Folders...
-          mkdir C:\Sites\Branches\${{ github.ref_name }}
-          mkdir C:\Sites\Branches\${{ github.ref_name }}\Api
-          mkdir C:\Sites\Branches\${{ github.ref_name }}\ProApi
-          mkdir C:\Sites\Branches\${{ github.ref_name }}\Services
-          mkdir C:\Sites\Branches\${{ github.ref_name }}\WindowsService
-          mkdir C:\Sites\Branches\${{ github.ref_name }}\LinkDePagamento
-
   Create-iis-site:
    runs-on: self-hosted
-   needs: [test-path,creat-folder]
+   needs: test-path
 
    steps:
     - name: Checkout
