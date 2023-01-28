@@ -26,13 +26,20 @@ jobs:
     steps:
     - name: Check if directory exists
       run: |
+        $folder = ${{ env.directory }}
         $dir = "${{ env.directory }}"
         if (Test-Path $dir) {
-        Write-Host "Directory exists"
+        Write-Host "Directory exists."
         exit 1
         } else {
-        Write-Host "Directory does not exist"
-        exit 0
+        Write-Host "Directory does not exist. Creating..."
+        mkdir $folder
+        mkdir $folder\Api
+        mkdir $folder\ProApi
+        mkdir $folder\Services
+        mkdir $folder\WindowsService
+        mkdir $folder\LinkDePagamento
+        exit 1
         }
 
   creat-folder:
