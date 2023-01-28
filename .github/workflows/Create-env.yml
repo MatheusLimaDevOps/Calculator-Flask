@@ -26,7 +26,6 @@ jobs:
     steps:
     - name: Check if directory exists
       run: |
-        $directory = "${{ env.directory }}"
         if (Test-Path ${{ env.$directory }}) {
         Write-Host "Directory exists"
         exit 1
