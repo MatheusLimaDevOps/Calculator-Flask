@@ -30,7 +30,7 @@ jobs:
         $dir = "${{ env.directory }}"
         if (Test-Path $dir) {
         Write-Host "Directory exists."
-        exit 1
+        exit 0
         } else {
         Write-Host "Directory does not exist. Creating..."
         mkdir $folder
@@ -39,7 +39,7 @@ jobs:
         mkdir $folder\Services
         mkdir $folder\WindowsService
         mkdir $folder\LinkDePagamento
-        exit 1
+        exit 0
         }
 
   Create-iis-site:
