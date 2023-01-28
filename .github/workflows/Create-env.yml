@@ -35,7 +35,7 @@ jobs:
 
   creat-folder:
     runs-on: self-hosted
-    if: ${{ job1.status == 'success' }}
+    if: test-path.status == 'success'
     steps:
       - name: Create Folder
         run: |
@@ -58,7 +58,7 @@ jobs:
         clean: false
     
     - name: Create Web Site
-      if: ${{ job1.status == 'success' }}
+      if: test-path.status == 'success'
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
