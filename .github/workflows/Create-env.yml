@@ -20,7 +20,7 @@ env:
 
 jobs:
 
-  job1:
+  test-path:
     runs-on: self-hosted
 
     steps:
@@ -35,7 +35,7 @@ jobs:
 
   creat-folder:
     runs-on: self-hosted
-    if: job1.status == 'success'
+    if: steps.test-path.outputs.exit-code == '0'
     steps:
       - name: Create Folder
         run: |
@@ -58,7 +58,7 @@ jobs:
         clean: false
     
     - name: Create Web Site
-      if: job1.status == 'success'
+      if: steps.test-path.outputs.exit-code == '0'
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
