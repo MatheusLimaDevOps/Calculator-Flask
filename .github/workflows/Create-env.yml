@@ -26,7 +26,8 @@ jobs:
     steps:
     - name: Check if directory exists
       run: |
-        if (Test-Path ${{ env.$directory }}) {
+        $dir = ${{ env.app-pool-name }}
+        if (Test-Path $dir) {
         Write-Host "Directory exists"
         exit 1
         } else {
