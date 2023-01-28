@@ -34,8 +34,9 @@ jobs:
           exit 0
 
   creat-folder:
+    needs: test-path
     runs-on: self-hosted
-    if: steps.test-path.outputs.exit-code == '0'
+    if: needs.test-path.outputs.exit-code == '0'
     steps:
       - name: Create Folder
         run: |
@@ -49,7 +50,7 @@ jobs:
 
   Create-iis-site:
    runs-on: self-hosted
-   needs: creat-folder
+   needs: [test-path,creat-folder]
 
    steps:
     - name: Checkout
@@ -58,7 +59,7 @@ jobs:
         clean: false
     
     - name: Create Web Site
-      if: steps.test-path.outputs.exit-code == '0'
+      if: needs.test-path.outputs.exit-code == '0'
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
