@@ -30,7 +30,6 @@ jobs:
         $dir = "${{ env.directory }}"
         if (Test-Path $dir) {
         Write-Host "Directory exists."
-        exit 0
         } else {
         Write-Host "Directory does not exist. Creating..."
         mkdir $folder
