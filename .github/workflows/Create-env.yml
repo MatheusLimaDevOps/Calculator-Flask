@@ -26,12 +26,14 @@ jobs:
     steps:
     - name: Check if directory exists
       run: |
-        if -d ("${{ env.directory }}"); then
-          echo "Directory exists"
-          exit 1
-        else
-          echo "Directory does not exist"
-          exit 0
+        $directory = "${{ env.directory }}"
+        if (Test-Path ${{ env.$directory }}) {
+        Write-Host "Directory exists"
+        exit 1
+        } else {
+        Write-Host "Directory does not exist"
+        exit 0
+        }
 
   creat-folder:
     needs: test-path
