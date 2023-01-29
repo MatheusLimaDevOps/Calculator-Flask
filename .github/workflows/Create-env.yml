@@ -26,13 +26,12 @@ jobs:
     steps:
     - name: Check if directory exists
       run: |
-        $ErrorActionPreference = "SilentlyContinue"
-        echo off
         $folder = "${{ env.directory }}"
         $dir = "${{ env.directory }}"
         if (Test-Path $dir) {
         Write-Host "Directory exists."
-        exit 1
+        echo ::set-env name=FOLDER_EXISTS::true
+        exit 0
         } else {
         Write-Host "Directory does not exist. Creating..."
         mkdir $folder
@@ -41,6 +40,7 @@ jobs:
         mkdir $folder\Services
         mkdir $folder\WindowsService
         mkdir $folder\LinkDePagamento
+        echo ::set-env name=FOLDER_EXISTS::false
         exit 0
         }
 
@@ -55,7 +55,7 @@ jobs:
         clean: false
     
     - name: Create Web Site
-      if: needs.test-path.outputs.exit-code == '0'
+      if: env.FOLDER_EXISTS == 'false'
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
