@@ -45,15 +45,13 @@ jobs:
         }
 
   Create-iis-site:
-   if: outputs.FOLDER_EXISTS == 'false'
+   if: steps.test-path.outputs.FOLDER_EXISTS == 'false'
    runs-on: self-hosted
    needs: test-path
    
    steps:
     - name: Checkout
       uses: actions/checkout@v3
-      with:
-        clean: false
     
     - name: Create Web Site
       working-directory: c:\Windows\System32\inetsrv
