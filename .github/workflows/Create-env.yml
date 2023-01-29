@@ -41,6 +41,7 @@ jobs:
         mkdir $folder\LinkDePagamento
         exit 0
         }
+        ignore_error: true
 
   Create-iis-site:
    runs-on: self-hosted
