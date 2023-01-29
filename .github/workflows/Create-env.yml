@@ -45,10 +45,10 @@ jobs:
         }
 
   Create-iis-site:
+   if: env.FOLDER_EXISTS == 'false'
    runs-on: self-hosted
    needs: test-path
-   if: env.FOLDER_EXISTS == 'false'
-
+   
    steps:
     - name: Checkout
       uses: actions/checkout@v3
