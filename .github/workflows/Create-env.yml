@@ -26,6 +26,8 @@ jobs:
     steps:
     - name: Check if directory exists
       run: |
+        $ErrorActionPreference = "SilentlyContinue"
+        echo off
         $folder = "${{ env.directory }}"
         $dir = "${{ env.directory }}"
         if (Test-Path $dir) {
@@ -41,7 +43,6 @@ jobs:
         mkdir $folder\LinkDePagamento
         exit 0
         }
-        ignore_error: true
 
   Create-iis-site:
    runs-on: self-hosted
