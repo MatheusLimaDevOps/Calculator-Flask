@@ -47,6 +47,7 @@ jobs:
   Create-iis-site:
    runs-on: self-hosted
    needs: test-path
+   if: env.FOLDER_EXISTS == 'false'
 
    steps:
     - name: Checkout
@@ -55,7 +56,6 @@ jobs:
         clean: false
     
     - name: Create Web Site
-      if: env.FOLDER_EXISTS == 'false'
       working-directory: c:\Windows\System32\inetsrv
       shell: cmd
       run: |
