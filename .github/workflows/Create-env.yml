@@ -23,7 +23,7 @@ jobs:
   test-path:
     runs-on: self-hosted
     outputs:
-      FOLDER_EXISTS: ${{ steps.folder.outputs.FOLDER_EXISTS }}
+      FOLDER_EXISTS: ${{ steps.folder.outputs.teste }}
       
 
     steps:
