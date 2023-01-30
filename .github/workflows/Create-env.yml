@@ -23,7 +23,7 @@ jobs:
   test-path:
     runs-on: self-hosted
     outputs:
-      FOLDER_EXISTS: ${{ steps.folder.outputs.teste }}
+      FOLDER_EXISTS: ${{ steps.folder.outputs.FOLDER_EXISTS }}
    
     steps:
     - name: Check if directory exists
@@ -33,7 +33,7 @@ jobs:
         $dir = "${{ env.directory }}"
         if (Test-Path $dir) {
         Write-Host "Directory exists."
-        Write-Host "teste=true" >> $GITHUB_OUTPUT
+        Write-Host "FOLDER_EXISTS=true" >> $GITHUB_OUTPUT
         exit 0
         } else {
         Write-Host "Directory does not exist. Creating..."
@@ -43,7 +43,7 @@ jobs:
         mkdir $folder\Services
         mkdir $folder\WindowsService
         mkdir $folder\LinkDePagamento
-        Write-Host "teste=false" >> $GITHUB_OUTPUT
+        Write-Host "FOLDER_EXISTS=false" >> $GITHUB_OUTPUT
         exit 0
         }
 
