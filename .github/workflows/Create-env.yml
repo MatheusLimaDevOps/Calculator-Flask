@@ -22,6 +22,8 @@ jobs:
 
   test-path:
     runs-on: self-hosted
+    outputs:
+      FOLDER_EXISTS: ${{ steps.folder.outputs.teste }}
    
     steps:
     - name: Check if directory exists
@@ -31,7 +33,7 @@ jobs:
         $dir = "${{ env.directory }}"
         if (Test-Path $dir) {
         Write-Host "Directory exists."
-        echo teste=true >> $GITHUB_OUTPUT
+        echo "teste=true" >> $GITHUB_OUTPUT
         exit 0
         } else {
         Write-Host "Directory does not exist. Creating..."
@@ -41,18 +43,17 @@ jobs:
         mkdir $folder\Services
         mkdir $folder\WindowsService
         mkdir $folder\LinkDePagamento
-        echo teste=false >> $GITHUB_OUTPUT
+        echo "teste=false" >> $GITHUB_OUTPUT
         exit 0
         }
 
         echo "FOLDER_EXISTS: ${{ steps.folder.outputs.teste }}"
-    outputs:
-      FOLDER_EXISTS: ${{ steps.folder.outputs.teste }}
+    
 
         
 
   Create-iis-site:
-   if: needs.test-path.outputs.teste == 'false'
+   if: needs.test-path.outputs.FOLDER_EXISTS == 'false'
    runs-on: self-hosted
    needs: test-path
    
