@@ -34,7 +34,7 @@ jobs:
         $dir = "${{ env.directory }}"
         if (Test-Path $dir) {
         Write-Host "Directory exists."
-        echo FOLDER_EXISTS=true >> $GITHUB_OUTPUT
+        echo teste=true >> $GITHUB_OUTPUT
         exit 0
         } else {
         Write-Host "Directory does not exist. Creating..."
@@ -44,7 +44,7 @@ jobs:
         mkdir $folder\Services
         mkdir $folder\WindowsService
         mkdir $folder\LinkDePagamento
-        echo FOLDER_EXISTS=false >> $GITHUB_OUTPUT
+        echo teste=false >> $GITHUB_OUTPUT
         exit 0
         }
 
