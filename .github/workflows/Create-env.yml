@@ -44,8 +44,12 @@ jobs:
         exit 0
         }
 
+    - name: Debug
+      run: |
+        echo "FOLDER_EXISTS: ${{ steps.test-path.outputs.FOLDER_EXISTS }}"
+
   Create-iis-site:
-   if: steps.test-path.outputs.FOLDER_EXISTS == 'false'
+   if: needs.test-path.outputs.FOLDER_EXISTS == 'false'
    runs-on: self-hosted
    needs: test-path
    
