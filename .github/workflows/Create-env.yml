@@ -45,7 +45,7 @@ jobs:
         }
 
   Create-iis-site:
-   if: needs.test-path.outputs.FOLDER_EXISTS == 'false'
+   if: steps.test-path.outputs.FOLDER_EXISTS == 'false'
    runs-on: self-hosted
    needs: test-path
    
