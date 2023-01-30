@@ -22,10 +22,7 @@ jobs:
 
   test-path:
     runs-on: self-hosted
-    outputs:
-      FOLDER_EXISTS: ${{ steps.folder.outputs.teste }}
-      
-
+   
     steps:
     - name: Check if directory exists
       id: folder
@@ -48,12 +45,14 @@ jobs:
         exit 0
         }
 
-    - name: Debug
-      run: |
-        echo "FOLDER_EXISTS: ${{ steps.folder.outputs.FOLDER_EXISTS }}"
+        echo "FOLDER_EXISTS: ${{ steps.folder.outputs.teste }}"
+    outputs:
+      FOLDER_EXISTS: ${{ steps.folder.outputs.teste }}
+
+        
 
   Create-iis-site:
-   if: needs.test-path.outputs.FOLDER_EXISTS == 'false'
+   if: needs.test-path.outputs.teste == 'false'
    runs-on: self-hosted
    needs: test-path
    
