@@ -13,7 +13,7 @@ jobs:
         clean: false
     
     - name: Build App
-      run: sudo docker build -t calcflask:$GITHUB_SHA ./calc-flask/Web/calc-docker
+      run: sudo docker build -t calcflask:$GITHUB_SHA ./home/ubuntu/actions-runner/_work/Calculator-Flask/Calculator-Flask/Web/calc-docker
     
     - name: Run App
       run: sudo docker run -d -p 80:80 calcflask:$GITHUB_SHA
