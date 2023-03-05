@@ -1,0 +1,19 @@
+name: Update App
+on:
+  release:
+    types: [created]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        clean: false
+    
+    - name: Build App
+      run: docker build -t calcflask:$GITHUB_SHA .
+    
+    - name: Run App
+      run: docker run -d -p 80:80 calcflask:$GITHUB_SHA
