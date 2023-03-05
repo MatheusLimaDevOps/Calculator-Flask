@@ -14,8 +14,8 @@ jobs:
     
     - name: Build App
       working-directory: /home/ubuntu/actions-runner/_work/Calculator-Flask/Calculator-Flask/Web/calc-docker
-      run: sudo docker build -t calcflask:$GITHUB_SHA .
+      run: sudo docker build -t calcflask:1.0 .
     
     - name: Run App
       working-directory: /home/ubuntu/actions-runner/_work/Calculator-Flask/Calculator-Flask/Web/calc-docker
-      run: sudo docker run -d --restart -p 80:80 calcflask:$GITHUB_SHA
+      run: sudo docker run -d -p 80:80 calcflask:1.0
