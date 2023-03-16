@@ -16,4 +16,4 @@ jobs:
         env:
           JIRA_BASE_URL: https://perlink.atlassian.net/rest/api/3
           JIRA_API_TOKEN: ATATT3xFfGF01-M0ryPGwI-nIWH6jKaklcXGtXDPRjwi8X2o9Cc3pMZCGismg8wbyTPH74xyQX7LIwcV9wZBLmJYBJM464YSaEd8LMg-S3sJWnIumOlHjLPGZN3vW3BYPFPfB4bgG20xhyUBfwAULcH8cJGNCDQguEMETX50-C_r1t1QMa8LhH4=0899A6CF
-          JIRA_EMAIL: matheus.lima@trinks.com.br
+          JIRA_EMAIL: matheus.lima@trinks.com
