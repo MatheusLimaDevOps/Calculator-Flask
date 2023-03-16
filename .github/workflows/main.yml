@@ -25,4 +25,4 @@ jobs:
         summary: ${{ github.event.pull_request.title }}
 
     - name: Log created issue
-    run: echo "Issue ${{ github.event.pull_request.title }} was created"
+      run: echo "Issue ${{ github.event.pull_request.title }} was created"
