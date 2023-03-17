@@ -2,27 +2,43 @@ name: Jira Card Creator
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, closed]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     name: Jira Example
     steps:
+    - name: Check pull request status
+      run: |
+        if [ "${{ github.event.pull_request.merged }}" != "true" ]; then
+          echo "Pull request not merged, skipping...";
+          exit 78;
+        fi
+    
     - name: Login
       uses: atlassian/gajira-login@v3
       env:
-        JIRA_BASE_URL: https://perlink.atlassian.net/
-        JIRA_USER_EMAIL: matheus.lima@trinks.com
-        JIRA_API_TOKEN: ATATT3xFfGF01-M0ryPGwI-nIWH6jKaklcXGtXDPRjwi8X2o9Cc3pMZCGismg8wbyTPH74xyQX7LIwcV9wZBLmJYBJM464YSaEd8LMg-S3sJWnIumOlHjLPGZN3vW3BYPFPfB4bgG20xhyUBfwAULcH8cJGNCDQguEMETX50-C_r1t1QMa8LhH4=0899A6CF
-
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
   
     - name: Create
+      if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
       id: create
       uses: atlassian/gajira-create@v3
       with:
         project: EX
-        issuetype: Build
+        issuetype: Solicitação de Extração
         summary: ${{ github.event.pull_request.title }}
 
     - name: Log created issue
-      run: echo "Issue ${{ github.event.pull_request.title }} was created"
+      if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
+      run: echo "Issue ${{ steps.create.data.key }} was created"
+    
+    - name: Transition to "MERGEADO"
+      if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged }}
+      uses: atlassian/gajira-transition@v3
+      with:
+        issueKey: ${{ steps.create.data.key }}
+        transitionName: MERGEADO
