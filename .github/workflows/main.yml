@@ -13,7 +13,7 @@ jobs:
       run: |
         if [ "${{ github.event.pull_request.merged }}" != "true" ]; then
           echo "Pull request not merged, skipping...";
-          exit 78;
+          exit 0;
         fi
     
     - name: Login
