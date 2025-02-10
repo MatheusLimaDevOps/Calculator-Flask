@@ -31,7 +31,7 @@ jobs:
           Write-Host "Job de teste concluído."
 
   liberar_fila:
-    runs-on: [self-hosted, fila]
+    runs-on: [self-hosted, casa]
     needs: executar_tarefa
     if: always()
     steps:
