@@ -1,0 +1,42 @@
+name: Teste de Fila
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+
+      - name: Aguardar na fila
+        shell: pwsh
+        run: |
+          # Obtém o ID do job do GitHub Actions
+          $jobId = $env:GITHUB_RUN_ID
+          $body = "{ \"job_id\": \"$jobId\" }"
+          Write-Host "Aguardando na fila com Job ID: $jobId"
+          # Envia requisição para o endpoint /enqueue do servidor de fila
+          $response = Invoke-WebRequest -Uri "http://localhost:5000/enqueue" -Method Post -Body $body -ContentType "application/json"
+          Write-Host "Resposta da fila: $($response.Content)"
+
+      - name: Executar tarefa principal
+        shell: pwsh
+        run: |
+          Write-Host "Iniciando o job de teste, rodando por 1 minuto."
+          # Loop que simula uma tarefa de 1 minuto, com progresso a cada segundo
+          for ($i = 1; $i -le 60; $i++) {
+            Write-Host "Executando passo $i/60"
+            Start-Sleep -Seconds 1
+          }
+          Write-Host "Job de teste concluído."
+
+      - name: Liberar fila
+        if: always()
+        shell: pwsh
+        run: |
+          $jobId = $env:GITHUB_RUN_ID
+          $body = "{ \"job_id\": \"$jobId\" }"
+          Write-Host "Liberando a fila com Job ID: $jobId"
+          # Chama o endpoint /release para liberar o job da fila
+          $response = Invoke-WebRequest -Uri "http://localhost:5000/release" -Method Post -Body $body -ContentType "application/json"
+          Write-Host "Resposta da liberação: $($response.Content)"
