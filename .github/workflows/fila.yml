@@ -4,8 +4,8 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  build:
-    runs-on: self-hosted
+  aguardar_na_fila:
+    runs-on: [self-hosted, fila]
     steps:
       - name: Aguardar na fila
         shell: powershell
@@ -16,6 +16,10 @@ jobs:
           $response = Invoke-WebRequest -Uri "http://localhost:5000/enqueue" -Method Post -Body $body -ContentType "application/json"
           Write-Host "Resposta da fila: $($response.Content)"
 
+  executar_tarefa:
+    runs-on: [self-hosted, casa]
+    needs: aguardar_na_fila
+    steps:
       - name: Executar tarefa principal
         shell: powershell
         run: |
@@ -26,8 +30,12 @@ jobs:
           }
           Write-Host "Job de teste concluído."
 
+  liberar_fila:
+    runs-on: [self-hosted, fila]
+    needs: executar_tarefa
+    if: always()
+    steps:
       - name: Liberar fila
-        if: always()
         shell: powershell
         run: |
           $jobId = $env:GITHUB_RUN_ID
