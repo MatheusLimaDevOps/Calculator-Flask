@@ -1,15 +1,14 @@
 name: Teste de Fila
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 jobs:
   build:
     runs-on: self-hosted
     steps:
-
       - name: Aguardar na fila
-        shell: pwsh
+        shell: powershell
         run: |
           # Obtém o ID do job do GitHub Actions
           $jobId = $env:GITHUB_RUN_ID
@@ -20,7 +19,7 @@ jobs:
           Write-Host "Resposta da fila: $($response.Content)"
 
       - name: Executar tarefa principal
-        shell: pwsh
+        shell: powershell
         run: |
           Write-Host "Iniciando o job de teste, rodando por 1 minuto."
           # Loop que simula uma tarefa de 1 minuto, com progresso a cada segundo
@@ -32,7 +31,7 @@ jobs:
 
       - name: Liberar fila
         if: always()
-        shell: pwsh
+        shell: powershell
         run: |
           $jobId = $env:GITHUB_RUN_ID
           $body = "{ \"job_id\": \"$jobId\" }"
