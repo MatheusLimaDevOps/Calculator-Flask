@@ -29,6 +29,7 @@ jobs:
             Start-Sleep -Seconds 1
           }
           Write-Host "Job de teste concluído."
+          exit 1
 
   liberar_fila:
     runs-on: [self-hosted, casa]
