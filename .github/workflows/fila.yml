@@ -5,7 +5,7 @@ on:
 
 jobs:
   aguardar_na_fila:
-    runs-on: windows-latest
+    runs-on: [self-hosted, casa]
     steps:
       - name: Aguardar na fila
         shell: powershell
@@ -13,7 +13,7 @@ jobs:
           $jobId = $env:GITHUB_RUN_ID
           $body = @{ job_id = $jobId } | ConvertTo-Json -Compress
           Write-Host "Aguardando na fila com Job ID: $jobId"
-          $response = Invoke-WebRequest -Uri "http://3.235.45.10:5000/enqueue" -Method Post -Body $body -ContentType "application/json"
+          $response = Invoke-WebRequest -Uri "http://localhost:5000/enqueue" -Method Post -Body $body -ContentType "application/json"
           Write-Host "Resposta da fila: $($response.Content)"
 
   executar_tarefa:
