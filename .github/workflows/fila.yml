@@ -5,7 +5,7 @@ on:
 
 jobs:
   aguardar_na_fila:
-    runs-on: [self-hosted, casa]
+    runs-on: ubuntu-latest
     steps:
       - name: Aguardar na fila
         shell: powershell
